@@ -21,4 +21,4 @@ ADD kubeless.py .
 
 USER 1000
 
-CMD ["python", "/kubeless.py"]
+ENTRYPOINT echo cleanup; for i in $(env | grep '_SERVICE_\|_PORT' | cut -f1 -d=); do unset $i; done; echo '---'; echo $(env); python /kubeless.py
